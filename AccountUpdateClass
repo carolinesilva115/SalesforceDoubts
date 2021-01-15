@@ -1,5 +1,5 @@
 public class AccountUpdate {
-    public static boolean runTrigger = true;
+    public static boolean runTrigger = true; //I create this variable to stop the looping, but I don't know where I have to put 'runTrigger = False;'
     
     //This future Mehod update the Account Name 
     @Future(callout=true)
