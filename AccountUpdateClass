@@ -1,0 +1,37 @@
+public class AccountUpdate {
+    public static boolean runTrigger = true;
+    
+    //This future Mehod update the Account Name 
+    @Future(callout=true)
+	 public static void doAutomaticExternIntegration(List<Id> ids) {
+         
+         List<Account> accountsFound = [SELECT ID, Name FROM Account WHERE Id IN :ids];
+        
+        List<Account> accountToUpdate = new List<Account>();
+         
+          for (Account acc: accountsFound){
+              
+              acc.Name = 'externDataInput';
+              
+              accountToUpdate.add(acc);
+          }
+         
+         update accountToUpdate;
+     }
+     
+    //This class runs the Future Method above
+    public static void runFutureMethod (List<Account> accs){
+        
+       if(!runTrigger){
+            return;
+       }else{
+           
+    	List<Id> accountIds = new List<Id>();
+			for(Account acc : accs){
+				AccountIds.add(acc.Id);
+			}
+           
+       	doAutomaticExternIntegration(accountIds);
+      }
+    }
+}
