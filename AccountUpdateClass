@@ -2,7 +2,7 @@ public class AccountUpdate {
     public static boolean runTrigger = true; //I create this variable to stop the looping, but I don't know where I have to put 'runTrigger = False;'
     
     //This future Mehod update the Account Name 
-    @Future(callout=true)
+    @Future
 	 public static void doAutomaticExternIntegration(List<Id> ids) {
          
          List<Account> accountsFound = [SELECT ID, Name FROM Account WHERE Id IN :ids];
@@ -11,7 +11,7 @@ public class AccountUpdate {
          
           for (Account acc: accountsFound){
               
-              acc.Name = 'externDataInput';
+              acc.Name = 'ABCD';
               
               accountToUpdate.add(acc);
           }
